@@ -16,7 +16,7 @@ function AnnouncementForm({ initialContents, submitAction, buttonLabel = "Create
 
     const navigate = useNavigate();
 
-    const testIdPrefix = "HelpRequestForm";
+    const testIdPrefix = "AnnouncementForm";
 
     // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
     // Note that even this complex regex may still need some tweaks
@@ -51,14 +51,14 @@ function AnnouncementForm({ initialContents, submitAction, buttonLabel = "Create
                     data-testid={testIdPrefix + "-start"}
                     id="start"
                     type="datetime-local"
-                    isInvalid={Boolean(errors.requestTime)}
+                    isInvalid={Boolean(errors.start)}
                     {...register("start", {
                         required: "Start is required.",
                         pattern: isodate_regex
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.requestTime && 'Start is required and must be provided in ISO format.'}
+                    {errors.start && 'Start is required and must be provided in ISO format.'}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -68,13 +68,13 @@ function AnnouncementForm({ initialContents, submitAction, buttonLabel = "Create
                     data-testid={testIdPrefix + "-end"}
                     id="end"
                     type="datetime-local"
-                    isInvalid={Boolean(errors.requestTime)}
+                    isInvalid={Boolean(errors.end)}
                     {...register("end", {
                         pattern: isodate_regex
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.requestTime && 'End must be provided in ISO format.'}
+                    {errors.end && 'End must be provided in ISO format.'}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -86,13 +86,13 @@ function AnnouncementForm({ initialContents, submitAction, buttonLabel = "Create
                     data-testid={testIdPrefix + "-announcement"}
                     id="announcement"
                     rows={5}
-                    isInvalid={Boolean(errors.explanation)}
-                    {...register("explanation", {
-                        required: "Explanation is required."
+                    isInvalid={Boolean(errors.announcement)}
+                    {...register("announcement", {
+                        required: "Announcement is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.explanation?.message}
+                    {errors.announcement?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
