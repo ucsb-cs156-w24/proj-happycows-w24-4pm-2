@@ -174,14 +174,13 @@ import java.util.Optional;
 
         // Create the announcement
 <span class="fc" id="L176">        Announcement announcementObj = announcementLookup.get();</span>
-<span class="fc" id="L177">        announcementObj.setCommonsId(commonsId);</span>
-<span class="fc" id="L178">        announcementObj.setStart(start);</span>
-<span class="fc" id="L179">        announcementObj.setEnd(end);</span>
-<span class="fc" id="L180">        announcementObj.setAnnouncement(announcement);</span>
+<span class="fc" id="L177">        announcementObj.setStart(start);</span>
+<span class="fc" id="L178">        announcementObj.setEnd(end);</span>
+<span class="fc" id="L179">        announcementObj.setAnnouncement(announcement);</span>
 
         // Save the announcement
-<span class="fc" id="L183">        announcementRepository.save(announcementObj);</span>
-<span class="fc" id="L184">        return ResponseEntity.ok(announcementObj);</span>
+<span class="fc" id="L182">        announcementRepository.save(announcementObj);</span>
+<span class="fc" id="L183">        return ResponseEntity.ok(announcementObj);</span>
     }
 
 
@@ -191,18 +190,18 @@ import java.util.Optional;
     public ResponseEntity&lt;Object&gt; deleteAnnouncement(@Parameter(description = &quot;The id of the chat message&quot;) @RequestParam Long id) {
 
         // Try to get the chat message
-<span class="fc" id="L194">        Optional&lt;Announcement&gt; announcementLookup = announcementRepository.findByAnnouncementId(id);</span>
-<span class="fc bfc" id="L195" title="All 2 branches covered.">        if (!announcementLookup.isPresent()) {</span>
-<span class="fc" id="L196">            return ResponseEntity.badRequest().body(&quot;Cannot find announcement. id is invalid.&quot;);</span>
+<span class="fc" id="L193">        Optional&lt;Announcement&gt; announcementLookup = announcementRepository.findByAnnouncementId(id);</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (!announcementLookup.isPresent()) {</span>
+<span class="fc" id="L195">            return ResponseEntity.badRequest().body(&quot;Cannot find announcement. id is invalid.&quot;);</span>
         }
-<span class="fc" id="L198">        Announcement announcementObj = announcementLookup.get();</span>
+<span class="fc" id="L197">        Announcement announcementObj = announcementLookup.get();</span>
 
-<span class="fc" id="L200">        User user = getCurrentUser().getUser();</span>
-<span class="fc" id="L201">        Long userId = user.getId();</span>
+<span class="fc" id="L199">        User user = getCurrentUser().getUser();</span>
+<span class="fc" id="L200">        Long userId = user.getId();</span>
 
         // Hide the message
-<span class="fc" id="L204">        announcementRepository.delete(announcementObj);</span>
-<span class="fc" id="L205">        return ResponseEntity.ok(announcementObj);</span>
+<span class="fc" id="L203">        announcementRepository.delete(announcementObj);</span>
+<span class="fc" id="L204">        return ResponseEntity.ok(announcementObj);</span>
     }
 
 
