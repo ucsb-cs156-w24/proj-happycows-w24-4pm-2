@@ -52,7 +52,7 @@ import java.util.Optional;
         @Parameter(description = &quot;The datetime at which the announcement will be shown (defaults to current time)&quot;) @RequestParam(required = false) Date start,
         @Parameter(description = &quot;The datetime at which the announcement will stop being shown (optional)&quot;) @RequestParam(required = false) Date end,
         @Parameter(description = &quot;The announcement to be sent out&quot;) @RequestParam String announcement) {
-        
+
 <span class="fc" id="L56">        User user = getCurrentUser().getUser();</span>
 <span class="fc" id="L57">        Long userId = user.getId();</span>
 
@@ -97,7 +97,7 @@ import java.util.Optional;
     @PreAuthorize(&quot;hasAnyRole('ROLE_USER', 'ROLE_ADMIN')&quot;)
     @GetMapping(&quot;/getbycommonsid&quot;)
     public ResponseEntity&lt;Object&gt; getAnnouncements(@Parameter(description = &quot;The id of the common&quot;) @RequestParam Long commonsId) {
-        
+
         // Make sure the user is part of the commons or is an admin
 <span class="fc" id="L102">        Authentication auth = SecurityContextHolder.getContext().getAuthentication();</span>
 <span class="fc bfc" id="L103" title="All 2 branches covered.">        if (!auth.getAuthorities().stream().anyMatch(a -&gt; a.getAuthority().equals(&quot;ROLE_ADMIN&quot;))){</span>
@@ -138,7 +138,7 @@ import java.util.Optional;
         @Parameter(description = &quot;The datetime at which the announcement will be shown (defaults to current time)&quot;) @RequestParam(required = false) Date start,
         @Parameter(description = &quot;The datetime at which the announcement will stop being shown (optional)&quot;) @RequestParam(required = false) Date end,
         @Parameter(description = &quot;The announcement to be sent out&quot;) @RequestParam String announcement) {
-        
+
 <span class="fc" id="L142">        User user = getCurrentUser().getUser();</span>
 <span class="fc" id="L143">        Long userId = user.getId();</span>
 
@@ -165,9 +165,9 @@ import java.util.Optional;
 <span class="fc bfc" id="L165" title="All 4 branches covered.">        if (end != null &amp;&amp; start.after(end)) {</span>
 <span class="fc" id="L166">            return ResponseEntity.badRequest().body(&quot;Start date must be before end date.&quot;);</span>
         }
-        
+
 <span class="fc" id="L169">        Optional&lt;Announcement&gt; announcementLookup = announcementRepository.findByAnnouncementId(id);</span>
-        
+
 <span class="fc bfc" id="L171" title="All 2 branches covered.">        if (!announcementLookup.isPresent()) {</span>
 <span class="fc" id="L172">            return ResponseEntity.badRequest().body(&quot;Announcement could not be found. Invalid id.&quot;);</span>
         }
