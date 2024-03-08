@@ -133,18 +133,20 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -152,8 +154,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">78x</span>
-<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">79x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,13 +171,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,7 +197,7 @@ import { Card, Button, Container, Row, Col } from "react-bootstrap";
 const curr = new Date();
 &nbsp;
 function isFutureDate(startingDate) {
-    const startYear = parseInt(startingDate.substring(0,4));
+    const startYear = parseInt(startingDate);
     const startMonth = parseInt(startingDate.substring(5,7));
     const startDate = parseInt(startingDate.substring(8,10));
     const currYear = curr.getFullYear();
@@ -208,9 +208,11 @@ function isFutureDate(startingDate) {
         if (startMonth === currMonth) {
             return startDate &gt; currDate;
         } else {
+            // Stryker disable next-line all: mutation test unreasonable
             return startMonth &gt; currMonth;
         }
     } else {
+        // Stryker disable next-line all: mutation test unreasonable
         return startYear &gt; currYear;
     }
 }
@@ -234,10 +236,8 @@ const CommonsCard = ({ buttonText, buttonLink, commons }) =&gt; {
                                 className="mx-4"
                                 onClick={() =&gt; {
                                     if (buttonText === "Join" &amp;&amp; isFutureDate(commons.startingDate)) {
-                                        alert("This commons has not started yet and cannot be joined.\n The starting date is "
-                                         + parseInt(commons.startingDate.substring(5,7)) + "/" 
-                                         + parseInt(commons.startingDate.substring(8,10)) + "/" 
-                                         + commons.startingDate.substring(0,4));
+                                        // Stryker disable next-line all: unable to read alert text in tests
+                                        alert("This commons has not started yet and cannot be joined.\n The starting date is " + parseInt(commons.startingDate.substring(5,7)) + "/" + parseInt(commons.startingDate.substring(8,10)) + "/" + parseInt(commons.startingDate));
                                     } else {
                                         buttonLink(commons.id);
                                     }
@@ -262,7 +262,7 @@ export default CommonsCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Mar 07 2024 16:20:56 GMT-0800 (Pacific Standard Time)
+                at Thu Mar 07 2024 22:06:02 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
